@@ -32,44 +32,57 @@ object RateCalculatorTest : Spek({
     given("Big swell.") {
         given("Big period.") {
             given("From EAST") {
-                val swell = Swell(bigSwell, Direction.EAST, bigPeriod)
+                val greatSwell = Swell(bigSwell, Direction.EAST, bigPeriod)
                 given("Light offshore") {
                     it("should rate epic") {
                         assertEquals(
                                 RateDescription.EPIC,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(lightWindSpeed, Direction.WEST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(lightWindSpeed, Direction.WEST), Tide.RISING)).description)
                         assertEquals(
                                 RateDescription.EPIC,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(lightWindSpeed, Direction.SOUTH_WEST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(lightWindSpeed, Direction.SOUTH_WEST), Tide.RISING)).description)
                         assertEquals(
                                 RateDescription.EPIC,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(lightWindSpeed, Direction.NORTH_WEST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(lightWindSpeed, Direction.NORTH_WEST), Tide.RISING)).description)
                     }
                 }
                 given("Strong offshore") {
                     it("should rate good") {
                         assertEquals(
                                 RateDescription.AVERAGE,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(strongWindSpeed, Direction.WEST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.WEST), Tide.RISING)).description)
                         assertEquals(
                                 RateDescription.AVERAGE,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(strongWindSpeed, Direction.SOUTH_WEST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.SOUTH_WEST), Tide.RISING)).description)
                         assertEquals(
                                 RateDescription.AVERAGE,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(strongWindSpeed, Direction.NORTH_WEST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.NORTH_WEST), Tide.RISING)).description)
                     }
                 }
                 given("Light onshore") {
                     it("should rate good") {
                         assertEquals(
                                 RateDescription.GOOD,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(lightWindSpeed, Direction.EAST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(lightWindSpeed, Direction.EAST), Tide.RISING)).description)
                         assertEquals(
                                 RateDescription.GOOD,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(lightWindSpeed, Direction.SOUTH_EAST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(lightWindSpeed, Direction.SOUTH_EAST), Tide.RISING)).description)
                         assertEquals(
                                 RateDescription.GOOD,
-                                rateCalculator.calculate(Condition(Date(), swell, Wind(lightWindSpeed, Direction.NORTH_EAST), Tide.RISING)).description)
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(lightWindSpeed, Direction.NORTH_EAST), Tide.RISING)).description)
+                    }
+                }
+                given("Strong onshore") {
+                    it("should rate bad") {
+                        assertEquals(
+                                RateDescription.BAD,
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.EAST), Tide.RISING)).description)
+                        assertEquals(
+                                RateDescription.BAD,
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.SOUTH_EAST), Tide.RISING)).description)
+                        assertEquals(
+                                RateDescription.BAD,
+                                rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.NORTH_EAST), Tide.RISING)).description)
                     }
                 }
             }
