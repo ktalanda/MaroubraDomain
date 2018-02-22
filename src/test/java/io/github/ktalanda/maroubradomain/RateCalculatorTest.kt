@@ -29,6 +29,19 @@ object RateCalculatorTest : Spek({
                     rateCalculator.calculate(condition).description)
         }
     }
+    given("Huge swell"){
+        val condition = Condition(
+                Date(),
+                Swell(20.0, Direction.EAST, 10.0),
+                Wind(10, Direction.EAST),
+                Tide.RISING
+        )
+        it("should rate NONE.") {
+            assertEquals(
+                    RateDescription.NONE,
+                    rateCalculator.calculate(condition).description)
+        }
+    }
     given("Big swell.") {
         given("Big period.") {
             given("From EAST") {
@@ -49,13 +62,13 @@ object RateCalculatorTest : Spek({
                 given("Strong offshore") {
                     it("should rate good") {
                         assertEquals(
-                                RateDescription.AVERAGE,
+                                RateDescription.GOOD,
                                 rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.WEST), Tide.RISING)).description)
                         assertEquals(
-                                RateDescription.AVERAGE,
+                                RateDescription.GOOD,
                                 rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.SOUTH_WEST), Tide.RISING)).description)
                         assertEquals(
-                                RateDescription.AVERAGE,
+                                RateDescription.GOOD,
                                 rateCalculator.calculate(Condition(Date(), greatSwell, Wind(strongWindSpeed, Direction.NORTH_WEST), Tide.RISING)).description)
                     }
                 }
