@@ -3,7 +3,7 @@ package io.github.ktalanda.maroubradomain
 import io.github.ktalanda.maroubradomain.model.Direction
 import io.github.ktalanda.maroubradomain.model.Swell
 
-object SwellRate {
+internal object SwellRate {
     fun calculate(swell: Swell): Double {
         val swellDirectionRate = when (swell.direction) {
             Direction.EAST, Direction.NORTH_EAST, Direction.SOUTH_EAST -> 1.0

@@ -2,7 +2,7 @@ package io.github.ktalanda.maroubradomain
 
 import io.github.ktalanda.maroubradomain.model.RateDescription
 
-object RateMapper {
+internal object RateMapper {
     fun map(value: Double): RateDescription {
         return when ((value * 100).toInt()) {
             0 -> RateDescription.NONE

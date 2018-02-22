@@ -3,7 +3,7 @@ package io.github.ktalanda.maroubradomain
 import io.github.ktalanda.maroubradomain.model.Direction
 import io.github.ktalanda.maroubradomain.model.Wind
 
-object WindRate {
+internal object WindRate {
     fun calculate(wind: Wind): Double {
 
         if (wind.speed < 1) return 0.7
